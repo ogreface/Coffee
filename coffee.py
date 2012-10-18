@@ -12,12 +12,19 @@ urls = ("/coffee/(\d+)", "index",
         '/coffee/long/(\d+)', 'long_polling')
 
 FLAG=Event()
+SECRET=233499
 class index:
-    def GET(self,id):
+    def GET(self,passedId):
         global FLAG
-        FLAG.set()
-        FLAG.clear()
-        return 'Alarm sent'
+        global SECRET
+        print passedId
+        id = int(passedId)
+        if (id == SECRET):
+            FLAG.set()
+            FLAG.clear()
+            return 'Alarm sent'
+        else:
+            return "Invalid secret"
 
 
 class long_polling:
@@ -25,10 +32,15 @@ class long_polling:
     # long running requests such as this one don't block one another;
     # and thanks to "monkey.patch_all()" statement at the top, thread-local storage used by web.ctx
     # becomes greenlet-local storage thus making requests isolated as they should be.
-    def GET(self,id):
+    def GET(self,passedId):
         global FLAG
-        FLAG.wait()
-        return 'COFFEE:'+ str(time.time())
+        global SECRET
+        id = int(passedId)
+        if (id == SECRET):
+            FLAG.wait()
+            return 'COFFEE:'+ str(time.time())
+        else:
+            return "Invalid Secret"
 
 
 if __name__ == "__main__":
