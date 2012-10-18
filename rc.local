@@ -1,0 +1,8 @@
+#! /bin/bash
+exec 2> /var/log/rc.local.debug
+exec 1> /var/log/stdout.log
+set -x
+echo "Setting up gpio..."
+/etc/coffee/setup.sh
+echo "Staring coffee daemon..."
+nohup /etc/coffee/coffeeclient.py 2>&1 &
