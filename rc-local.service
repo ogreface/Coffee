@@ -1,0 +1,13 @@
+[Unit]
+Description=RC Local
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.local
+KillMode=none
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+#Runs rc.local
