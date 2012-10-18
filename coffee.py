@@ -35,5 +35,5 @@ class long_polling:
 if __name__ == "__main__":
     application = web.application(urls, globals()).wsgifunc()
     print 'Serving on 80...'
-    port = os.environ['PORT']
+    port = int(os.environ['PORT'])
     WSGIServer(('', port), application).serve_forever()
