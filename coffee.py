@@ -1,4 +1,5 @@
 #!/usr/bin/python
+"""Based on http://code.google.com/p/gevent/source/browse/examples/webpy.py?r=aa7080f89a735172d49dc02627153368280cbc82"""
 """A web.py application powered by gevent"""
 
 from gevent import monkey; monkey.patch_all()
